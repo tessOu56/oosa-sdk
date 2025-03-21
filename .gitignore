@@ -1,0 +1,8 @@
+node_modules/
+dist/
+coverage/
+.env
+.vscode/
+pnpm-lock.yaml
+**/*.test.ts
+**/__mocks__/

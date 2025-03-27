@@ -1,17 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { ApiError, ApiErrorType } from "./apiError";
-import { DefaultApi, Configuration } from "../generated";
-
-export interface ApiResponse<T> {
-  data: T | null;
-  error?: string;
-}
-
-export interface ApiRequestOptions extends RequestInit {
-  headers?: Record<string, string>;
-  body?: string | FormData;
-  params?: Record<string, string>;
-}
+import { ApiError, ApiErrorType } from "@apis/apiError";
+import { DefaultApi, Configuration } from "./generated";
+import { ApiRequestOptions, ApiResponse, ClientType } from "@apis/apiClient.types";
+import { normalizeHeaders, normalizeParams } from '../utils/apiUtils'
 
 export class ApiClient {
   private baseUrl: string;
@@ -76,11 +67,11 @@ export class ApiClient {
     const { params = {}, headers: userHeaders = {}, ...rest } = options || {};
 
     const { csrf_token } = params;
-    const headers: Record<string, string> = {
+    const headers = normalizeHeaders({
       "Content-Type": "application/json",
       ...userHeaders,
       ...(csrf_token ? { "X-CSRF-Token": csrf_token } : {}),
-    };
+    })
 
     if (this.clientType === "axios" && this.axiosInstance) {
       try {
@@ -103,8 +94,8 @@ export class ApiClient {
     // fetch 版本
     let urlWithParams = this.baseUrl + endpoint;
     if (params) {
-      const query = new URLSearchParams(params).toString();
-      urlWithParams += (endpoint.includes("?") ? "&" : "?") + query;
+      const query = new URLSearchParams(normalizeParams(params)).toString()
+      urlWithParams += (endpoint.includes("?") ? "&" : "?") + query
     }
 
     const controller = new AbortController();

@@ -6,7 +6,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "generate:sdk": "openapi-generator-cli generate -i openapi/OOSA.openapi.json -g typescript-axios -o src/generated --skip-validate-spec",
+    "generate:sdk": "node scripts/check-and-downgrade-openapi.js && rm -rf src/apis/generated && mkdir -p src/apis/generated && openapi-generator-cli generate -i openapi/OOSA.openapi.json -g typescript-axios -o src/apis/generated --skip-validate-spec",
     "generate:zod": "openapi-zod-client generate --config zod.config.json",
     "lint": "eslint .",
     "test": "vitest run",
@@ -16,6 +16,8 @@
     "docs": "typedoc"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.69.0",
+    "@tanstack/react-query-devtools": "^5.69.0",
     "axios": "^1.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
@@ -26,7 +28,6 @@
     "@openapitools/openapi-generator-cli": "^2.18.4",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
-    "@types/axios": "^0.14.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
@@ -36,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "jsdom": "^26.0.0",
+    "msw": "^2.7.3",
     "openapi-zod-client": "^1.18.3",
     "tsup": "^8.4.0",
     "typedoc": "^0.28.1",
@@ -43,5 +45,11 @@
     "typescript-eslint": "^8.24.1",
     "vite": "^6.2.0",
     "vitest": "^3.0.9"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./mock": "./dist/mock/MockApiClient.js",
+    "./mock/data/sso": "./dist/mock/data/sso.mock.js",
+    "./mock/handlers/sso": "./dist/mock/handlers/sso.handler.js"
   }
 }

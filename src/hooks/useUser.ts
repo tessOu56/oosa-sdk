@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { DefaultApi, Configuration } from "../generated";
+import { DefaultApi, Configuration } from "../apis/generated";
 
 const api = new DefaultApi(new Configuration());
 

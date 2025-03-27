@@ -1,17 +1,29 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "jsx": "react-jsx",
-    "strict": true,
+    "lib": ["DOM", "ESNext"],
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "dist"
-  }
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@oosa-types/*": ["types/*"],
+      "@utils/*": ["utils/*"],
+      "@generated/*": ["apis/generated/*"],
+      "@apis/*": ["apis/*"],
+      "@hooks/*": ["hooks/*"],
+      "@mock/*": ["mock/*"]
+    },
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["msw"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

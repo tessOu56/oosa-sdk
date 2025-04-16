@@ -7,5 +7,7 @@ export default defineConfig({
         all: true,
         exclude: ["**/generated/**", "**/node_modules/**"],
       },
+      environment: 'jsdom',
+      globals: true
     },
 });

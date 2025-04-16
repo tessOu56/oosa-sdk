@@ -11,7 +11,7 @@ export class ApiClient {
   private api: DefaultApi;
 
   constructor(
-    baseUrl: string = process.env.REACT_APP_API_URL || "https://api.oosa.com",
+    baseUrl: string = import.meta.env.VITE_API_URL || "https://api.oosa.com",
     clientType: "fetch" | "axios" = "fetch"
   ) {
     this.baseUrl = baseUrl;

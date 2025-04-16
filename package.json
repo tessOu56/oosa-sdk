@@ -37,7 +37,6 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
     "jsdom": "^26.0.0",
-    "msw": "^2.7.3",
     "openapi-zod-client": "^1.18.3",
     "tsup": "^8.4.0",
     "typedoc": "^0.28.1",
@@ -47,9 +46,6 @@
     "vitest": "^3.0.9"
   },
   "exports": {
-    ".": "./dist/index.js",
-    "./mock": "./dist/mock/MockApiClient.js",
-    "./mock/data/sso": "./dist/mock/data/sso.mock.js",
-    "./mock/handlers/sso": "./dist/mock/handlers/sso.handler.js"
+    ".": "./dist/index.js"
   }
 }

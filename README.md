@@ -1,5 +1,107 @@
-
 # OOSA SDK
+
+TypeScript SDK for OOSA API with OpenAPI 3.0 support, React Query hooks, and Zod validation.
+
+## Features
+
+- 🚀 OpenAPI 3.0 support with automatic type generation
+- 🔄 React Query hooks for data fetching
+- ✅ Zod schema validation
+- 🎯 TypeScript support
+- 🔌 Axios and Fetch API clients
+- 🧪 Vitest unit testing
+- 📊 Test coverage reporting
+
+## Installation
+
+```bash
+npm install oosa-sdk
+# or
+yarn add oosa-sdk
+# or
+pnpm add oosa-sdk
+```
+
+## Usage
+
+### API Client
+
+```typescript
+import { ApiClient, FetchApiClient } from 'oosa-sdk';
+
+// Using Axios
+const axiosClient = new ApiClient({
+  baseURL: 'https://api.example.com',
+  headers: {
+    'Authorization': 'Bearer token'
+  }
+});
+
+// Using Fetch
+const fetchClient = new FetchApiClient({
+  baseURL: 'https://api.example.com',
+  headers: {
+    'Authorization': 'Bearer token'
+  }
+});
+```
+
+### React Query Hooks
+
+```typescript
+import { createSSOHooks } from 'oosa-sdk';
+
+const ssoHooks = createSSOHooks(ssoApi);
+const { useLoginFlow, useSSOAuthenticate } = ssoHooks;
+
+// In your component
+const { data: flow } = useLoginFlow('flow-id');
+```
+
+### Error Handling
+
+```typescript
+import { handleApiError } from 'oosa-sdk';
+
+try {
+  await api.someEndpoint();
+} catch (error) {
+  const apiError = handleApiError(error);
+  console.error(apiError.status, apiError.code, apiError.message);
+}
+```
+
+## Development
+
+### Setup
+
+```bash
+pnpm install
+```
+
+### Generate SDK
+
+```bash
+# Generate TypeScript Axios client
+pnpm generate:sdk
+
+# Generate Zod schemas
+pnpm generate:zod
+```
+
+### Testing
+
+```bash
+# Run tests
+pnpm test
+
+# Run tests with coverage
+pnpm coverage
+```
+
+## License
+
+MIT
 
 ![CI](https://github.com/your-org/oosa-sdk/actions/workflows/ci.yml/badge.svg)
 ![Coverage](https://coveralls.io/repos/github/your-org/oosa-sdk/badge.svg?branch=main)

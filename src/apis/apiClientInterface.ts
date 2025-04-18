@@ -1,6 +1,6 @@
-import type { SSOUser, SSOSession } from '../types/sso'
+import type { Identity, Session } from '../types/sso'
 
 export interface ApiClientInterface {
-  getSSOUser(): Promise<SSOUser>
-  loginWithSSO(flowId: string): Promise<SSOSession>
+  getSSOUser(): Promise<Identity>
+  loginWithSSO(flowId: string): Promise<Session>
 }
